@@ -1,0 +1,133 @@
+
+
+
+ String DATAEXPORTS_CHANNEL = "dataExportsChannel";
+    public static final String ADJUDICATION_SUMMARY_LISTENER = "summaryInboxConsumer";
+
+
+    @Input(VirtualInventoryMessageChannels.ADJUDICATION_SUMMARY_LISTENER)
+    MessageChannel summaryInboxConsumer();
+
+    @Output(VirtualInventoryMessageChannels.ADJUDICATION_SUMMARY_PRODUCER)
+    MessageChannel summaryProducer();
+
+    @Input(VirtualInventoryMessageChannels.VIRTUAL_INV_ORCHESTRATOR)
+    MessageChannel vIOrchestratorRequestChannel();
+
+    @Output(VirtualInventoryMessageChannels.ORCHESTRATOR_RESPONSE)
+    MessageChannel vIOrchestratorResponseChannel();
+
+    @Input(VirtualInventoryMessageChannels.DATAINGESTION_CHANNEL)
+    MessageChannel dataIngestionChannel();
+
+    @Input(VirtualInventoryMessageChannels.DATAEXPORTS_CHANNEL)
+    MessageChannel dataExportsChannel();
+
+
+
+
+
+
+app properties
+
+logging.rollingfile.maxfilesizemb = 100
+logging.rollingfile.maxhistorydays = 7
+logging.rollingfile.path = logs/
+
+#Kafka Binder Settings
+spring.cloud.stream.kafka.binder.brokers = localhost:9092
+spring.cloud.stream.kafka.binder.zkNodes = localhost:2181
+spring.cloud.stream.kafka.binder.autoAddPartitions = true
+
+
+
+pom.xml
+
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<spring-cloud.version>Dalston.SR4</spring-cloud.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-stream</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-stream-binder-kafka</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.capturerx.cumulus4.virtualinventory</groupId>
+			<artifactId>virtualinventory-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.capturerx.cumulus4.virtualinventory</groupId>
+			<artifactId>securityrestclient</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+</project>

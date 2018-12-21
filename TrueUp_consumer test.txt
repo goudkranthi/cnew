@@ -1,0 +1,24 @@
+
+ @Test
+public void test_true_up_message_created(){
+ 
+BillingTruepMessage trueUpMessage = new BillingTrueUpMessage();
+trueUpMessage.setId(UUID.random());
+trueUpMessage.setBatchId(UUID.random());
+trueUpMessage.setContractId(UUID.random());
+
+when(virtualInventoryTrueUpService.processMessage( billingTrueUpMessage)).thenReturn();
+
+
+}
+
+ @Test
+public void test_true_up_message_null(){
+ 
+BillingTruepMessage trueUpMessage = null;
+
+when(virtualInventoryTrueUpService.processMessage( billingTrueUpMessage)).thenReturn(Exception.class);
+
+
+}
+

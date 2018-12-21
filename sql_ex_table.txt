@@ -1,0 +1,296 @@
+
+created_date timestamp with time zone NOT NULL DEFAULT now(),
+    created_by character varying(50) COLLATE pg_catalog."default",
+last_modified_date timestamp with time zone,
+    last_modified_by character varying(50) COLLATE pg_catalog."default",
+prescription_id character varying(250) COLLATE pg_catalog."default",
+
+
+CREATE TABLE public."TU_Status"
+(
+    "ID" numeric NOT NULL,
+    "BATCH_ID" numeric NOT NULL,
+    "CONTRACT_ID" numeric NOT NULL,
+    "DESCRIPTION" character varying(250) COLLATE pg_catalog."default", 
+    "STATUS" character varying(10) COLLATE pg_catalog."default",
+    "CREATED_BY" character varying(50) COLLATE pg_catalog."default",
+    "CREATED_DATE" timestamp with time zone NOT NULL DEFAULT now(),
+    "UPDATED_DATE" timestamp with time zone,
+    "UPDATED_BY" character varying(50) COLLATE pg_catalog."default",
+    CONSTRAINT "TU_Status_pkey" PRIMARY KEY ("ID")
+)
+
+
+
+dropping table 
+-- Table: public."TU_Status"
+
+-- DROP TABLE public."TU_Status";
+
+CREATE TABLE public."TU_Status"
+(
+    "ID" numeric NOT NULL,
+    "BATCH_ID" numeric NOT NULL,
+    "CONTRACT_ID" numeric NOT NULL,
+    "DESCRIPTION" character varying(250) COLLATE pg_catalog."default",
+    "STATUS" character varying(10) COLLATE pg_catalog."default",
+    "CREATED_BY" character varying(50) COLLATE pg_catalog."default",
+    "CREATED_DATE" timestamp with time zone NOT NULL DEFAULT now(),
+    "UPDATED_DATE" timestamp with time zone,
+    "UPDATED_BY" character varying(50) COLLATE pg_catalog."default",
+    CONSTRAINT "TU_Status_pkey" PRIMARY KEY ("ID")
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public."TU_Status"
+    OWNER to postgres;
+
+----
+
+
+
+--updated new
+edit 
+
+CREATE TABLE public.true_up_status
+(
+    id uuid NOT NULL,
+    batch_id bigint NOT NULL,
+    contract_id uuid  NOT NULL,
+    status character varying(100) COLLATE pg_catalog."default",
+    description character varying(1000) COLLATE pg_catalog."default", 
+    created_date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    created_by character varying(50) COLLATE pg_catalog."default",
+    last_modified_date timestamp with time zone,
+    last_modified_by character varying(50) COLLATE pg_catalog."default",
+    CONSTRAINT pk_true_up_status_id PRIMARY KEY (id),
+);
+
+
+
+batch_id uuid,
+
+OLD create table
+
+
+-- Table: public.true_up_details
+
+-- DROP TABLE public.true_up_details;
+
+CREATE TABLE public.true_up_details
+(
+    id uuid NOT NULL,
+    virtual_inventory_header_id uuid,
+    batch_id uuid,
+    true_up_value double precision,
+    contract_id uuid,
+    dispense_transaction_id uuid,
+    fee_set_type uuid,
+    fee double precision,
+    units_available_to_true_up double precision,
+    true_up_expiry_range integer,
+    ndc character varying(20) COLLATE pg_catalog."default",
+    created_by character varying(50) COLLATE pg_catalog."default",
+    last_modified_by character varying(50) COLLATE pg_catalog."default",
+    created_date time with time zone,
+    last_modified_date time with time zone,
+    CONSTRAINT pk_true_up_details_id PRIMARY KEY (id),
+    CONSTRAINT fk_true_up_details_vi_header_id_virtual_inventory_headers_id FOREIGN KEY (virtual_inventory_header_id)
+        REFERENCES public.virtual_inventory_headers (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.true_up_details
+    OWNER to postgres;
+
+
+Old flyway script
+true up deta
+
+CREATE TABLE public.true_up_details(
+    id uuid NOT NULL,
+    virtual_inventory_header_id uuid,
+    batch_id uuid,
+    true_up_value double precision,
+    contract_id uuid,
+    dispense_transaction_id uuid,
+    fee_set_type uuid,
+    fee double precision,
+    units_available_to_true_up double precision,
+    true_up_expiry_range integer,
+    ndc character varying(20),
+    created_by character varying(50),
+    last_modified_by character varying(50),
+    created_date time with time zone,
+    last_modified_date time with time zone,
+    CONSTRAINT pk_true_up_details_id PRIMARY KEY (id),
+    CONSTRAINT fk_true_up_details_vi_header_id_virtual_inventory_headers_id FOREIGN KEY (virtual_inventory_header_id)
+        REFERENCES public.virtual_inventory_headers (id));
+
+
+
+
+--/-- new 
+
+
+CREATE TABLE public.true_up_details
+(
+    id uuid NOT NULL,
+    batch_id bigint NOT NULL,
+    contract_id uuid NOT NULL,
+    dispense_transaction_id uuid,
+    payor_type character varying(255) COLLATE pg_catalog."default",
+    true_up_units integer,
+    total_units integer,
+    ndc character varying(20),
+    source_type character varying(20) COLLATE pg_catalog."default",
+    created_date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    created_by character varying(50) COLLATE pg_catalog."default",
+    last_modified_date timestamp with time zone,
+    last_modified_by character varying(50) COLLATE pg_catalog."default",
+    CONSTRAINT pk_true_up_details_id PRIMARY KEY (id)
+);
+
+
+ ndc character varying(20)
+add ndc --
+
+true up details table 
+
+id uuid NOT NULL,
+ndc character varying(20),
+batch_id uuid, 
+contract_id uuid,  
+dispense_transaction_id uuid,
+payor_type character varying(255), 
+true_up_units integer,  
+total_units integer, 
+source_type character varying(20),
+created_date timestamp with timezone with current time,
+created_by character varying(50),
+last_modified_date timestamp with time zone,
+last_modified_by character varying(50),
+primary key id
+
+true up status same way 
+
+
+id uuid NOT NULL
+
+
+
+
+created_date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+created_date timestamp without time zone,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ex
+default time
+created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+created_at TIMESTAMPTZ DEFAULT Now() 
+
+
+
+
+
+
+
+
+
+@Autowired
+private TuStatusRepository tuStatusRepository;
+
+
+some method (){
+	tuStatusRepository.save(tuObject);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Events - in Post message 
+approved reversal acknowledgement 
+create acknowledgement
+
+
+
+sql script in pgadmin
+
+-- Table: public."TU_Status"
+
+-- DROP TABLE public."TU_Status";
+
+CREATE TABLE public."TU_Status"
+(
+    "ID" numeric NOT NULL,
+    "BATCH_ID" numeric NOT NULL,
+    "CONTRACT_ID" numeric NOT NULL,
+    "DESCRIPTION" character varying(250) COLLATE pg_catalog."default",
+    "STATUS" character varying(10) COLLATE pg_catalog."default",
+    "CREATED_BY" character varying(50) COLLATE pg_catalog."default",
+    "CREATED_DATE" timestamp with time zone NOT NULL DEFAULT now(),
+    "UPDATED_DATE" timestamp with time zone,
+    "UPDATED_BY" character varying(50) COLLATE pg_catalog."default",
+    CONSTRAINT "TU_Status_pkey" PRIMARY KEY ("ID")
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public."TU_Status"
+    OWNER to postgres;

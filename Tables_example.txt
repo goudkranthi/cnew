@@ -1,0 +1,53 @@
+
+
+TuStatusRepository
+
+package com.capturerx.cumulus4.virtualinventory.repositories;
+
+import com.capturerx.cumulus4.virtualinventory.models.TuStatus;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface TuStatusRepository extends JpaRepository<TuStatus,Long>{
+
+}
+
+
+
+
+
+models 
+
+
+package com.capturerx.cumulus4.virtualinventory.models;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.io.Serializable;
+import java.sql.Date;
+
+@Entity
+@Table(name="TUS_STATUS")
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
+public class TuStatus implements Serializable{
+
+    private Long id;
+    private Long batchId;
+    private Long contractId;
+    private String status;
+    private String description;
+    private Date createdDate;
+    private String createdBy;
+    private Date updatedDate;
+    private String updatedBy;
+
+}
